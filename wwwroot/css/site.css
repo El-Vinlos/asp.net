@@ -1,0 +1,291 @@
+/** {*/
+/*    background: #000 !important;*/
+/*    color: #0f0 !important;*/
+/*    outline: solid #f00 1px !important;*/
+/*}*/
+
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Merriweather", "Montserrat", "Open sans", sans-serif;
+    background: #000;
+    }
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+main{
+    background: #fff;
+    padding-bottom: 1rem;
+}
+
+.navbar-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 50px;
+    min-height: 60px;
+    background: transparent;
+    box-sizing: border-box;
+    z-index: 10;
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+.navbar-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-leftside,
+.navbar-rightside {
+    display: flex;
+    gap: 1rem;
+    flex: 1;
+}
+
+.navbar-leftside {
+    justify-content: flex-start;
+}
+
+.navbar-rightside {
+    justify-content: flex-end;
+}
+
+.navbar-logo {
+    position: relative;
+    transform: none;
+}
+.navbar-logo a {
+    font-size: 2rem;
+    font-weight: normal;
+    text-decoration: none;
+    color: #fff;
+    font-family: "Jost", sans-serif;
+    letter-spacing: 2px;
+    transition: color 0.4s ease;
+}
+
+.navbar-top a,
+.navbar-top button i {
+    color: #fff;
+    transition: color 0.4s ease;
+}
+
+.navbar-top.scrolled {
+    background: #fff;
+}
+
+.navbar-top.scrolled a,
+.navbar-top.scrolled button i {
+    color: #000;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.0);
+    z-index: 998;
+    display: none;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.sidebar-overlay.active {
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+.sidebar-menu a{
+    text-decoration: none;
+    border-bottom: #000 solid 1px;
+    color: #000;
+}
+.sidebar-menu {
+    position: fixed;
+    width: 220px;
+    height: 100vh;
+    overflow-y: auto;
+    background: #fff;
+    padding: 1rem;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+}
+
+.sidebar-menu.active {
+    transform: translateX(0);
+}
+.sidebar-menu.active i {
+    color: #000;
+}
+
+.menu-toggle-container {
+    height: 76px;
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    padding-left: 2.1rem;
+}
+
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+button i {
+    font-size: 1rem;
+    color: #fff;
+}
+
+
+/* FOOTER */
+.site-footer {
+    background-color: #000;
+    font-family: "Helvetica", "Montserrat", "Open sans", sans-serif;
+    color: #fff;
+    padding: 3rem 2rem;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem;
+}
+
+.footer-column h4 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-column ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+    color: #ccc;
+}
+
+.footer-logo a{
+    font-size: 10rem;
+    font-weight: normal;
+    text-decoration: none;
+    color: #fff;
+    font-family: "Jost", sans-serif;
+    letter-spacing: 2px;
+    transition: color 0.4s ease;
+}
+
+/* ============================= */
+/* Search Overlay                */
+/* ============================= */
+
+/* Search container inside navbar */
+.navbar-search {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    padding: 1rem 0;
+    z-index: 1000;
+}
+.navbar-search i {
+    transform: translateX(3.3rem);
+    color: #000;
+    transition: transform 0.4s ease;
+}
+#navbarSearchInput {
+    width: 100%;
+}
+
+.navbar-search.active {
+    width: 100%;
+}
+.navbar-search.active i {
+    transform: translateX(0);
+}
+
+.navbar-search input {
+    flex: 1;
+    padding: 0 0 0 1rem;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+}
+
+.navbar-search input::placeholder {
+    color: #aaa;
+}
+
+#navbarSearchForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2rem;
+}
+
+.search-suggestions {
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    color: #000;
+    background: #fff;
+    font-size: 0.9rem;
+    max-height: 200px;
+    overflow-y: auto;
+    
+} 
+
+.search-suggestions div {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+@media (max-width: 800px) {
+    .footer-logo a{
+        font-size: 5rem;
+    }
+}

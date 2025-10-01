@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="/site.webmanifest" />    
+    
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" /> 
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+    <nav class="navbar-top">
+        <div class="navbar-container">
+            <div class="navbar-leftside">
+                <button id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+                <button class="search-toggle"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+
+            <div class="navbar-logo">
+                <a asp-controller="Home" asp-action="Index">Florencia de Regano</a>
+            </div>
+
+            <div class="navbar-rightside">
+                <button id=""><i class="fa-solid fa-user"></i></button>
+                <button><i class="fa-solid fa-cart-shopping"></i></button>
+            </div>
+        </div>
+    </nav>        
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- Hidden Sidebar Menu -->
+        <div id="sidebar-menu" class="sidebar-menu">
+            <div class="menu-toggle-container">
+                <button id="menu-toggle-active"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <ul>
+                <li class="menu-item">
+                    <a href="#">Women</a>
+                    @await Html.PartialAsync("_MegaMenuWomen")
+                </li>
+                <li class="menu-item">
+                    <a href="#">Men</a>
+                    @await Html.PartialAsync("_MegaMenuMen")
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main role="main" class="pb-3">
+    @RenderBody()
+</main>
+
+
+<div class="navbar-search">
+    <form asp-controller="Search" id="navbarSearchForm" asp-action="Index" method="get">
+        <button type="submit" class="search-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <input type="text" name="query" id="navbarSearchInput" placeholder="Search products..." />
+    </form>
+    <div id="navbarSearchSuggestions" class="search-suggestions"></div>
+</div>
+
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-column">
+            <h4>EXPLORE DE REGAL</h4>
+            <ul>
+                <li><a href="#">Haute Couture</a></li>
+                <li><a href="#">Fashion</a></li>
+                <li><a href="#">Jewelry</a></li>
+                <li><a href="#">Watches</a></li>
+                <li><a href="#">Beauty</a></li>
+                <li><a href="#">Fragrance</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h4>ONLINE SERVICES</h4>
+            <ul>
+                <li><a href="#">Payment Methods</a></li>
+                <li><a href="#">Shipping Options</a></li>
+                <li><a href="#">My Account</a></li>
+                <li><a href="#">Returns</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">E-gift card</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h4>BOUTIQUE SERVICES</h4>
+            <ul>
+                <li><a href="#">Store Locator</a></li>
+                <li><a href="#">Book an Appointment</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h4>THE HOUSE OF DE REGAL</h4>
+            <ul>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Legal</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Sustainability</a></li>
+                <li><a href="#">Accessibility</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-logo">
+        <a asp-controller="Home" asp-action="Index">Florencia de Regano</a>
+    </div>
+</footer>
+<script src="~/js/site.js"></script>
+</body>
+
+</html>

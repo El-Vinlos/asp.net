@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Florencia Regano - Vietnamese Luxury FashionHouse";
+}
+
+<link rel="stylesheet" href="~/css/index.css" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<div class="hero">
+    <img src="~/images/front-pages/front-image-1024x576.webp" alt="La Bella de Regio Fall Collection 2025" />
+    <div class="hero-overlay">
+            <a href="#" class="hero-text"> Florencia Regano Commutes with Chung Thong</a>
+            <a href="#" class="hero-subtext" style="text-decoration: underline">Pre-Order Now</a>
+    </div>
+</div>
+
+<h1 class="title">La Bella de Regio — Fall Collection 2025</h1>
+
+<div class="collection-container">
+    <div class="collection-item">
+        <img src="~/images/front-pages/front-image2-576x1024.webp" alt="Fit 1 - Fall Collection 2025" />
+        <div class="overlay">
+            <span class="overlay-text">Velvet Elegance</span>
+        </div>
+    </div>
+    <div class="collection-item">
+        <img src="~/images/front-pages/front-image3-576x1024.webp" alt="Fit 2 - Fall Collection 2025" />
+        <div class="overlay">
+            <span class="overlay-text">Silk Serenity</span>
+        </div>
+    </div>
+    <div class="collection-item">
+        <img src="~/images/front-pages/front-image4-1-576x1024.webp" alt="Fit 3 - Fall Collection 2025" />
+        <div class="overlay">
+            <span class="overlay-text">Chiffon Grace</span>
+        </div>
+    </div>
+</div>
+
+<h1 class="title">Explore New Sneaker</h1>
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        @foreach (var shoe in ViewBag.Shoes)
+        {
+            <div class="swiper-slide">
+                <img src="~/@shoe.ImageUrl" alt="@shoe.ProductName" loading="lazy" />
+                <div class="slide-name">@shoe.ProductName</div>
+                <div class="slide-price">$@shoe.Price</div>
+            </div>
+        }
+    </div>
+    <!-- Navigation -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        centeredSlides: true,
+        spaceBetween: 150,
+        loop: true,
+        grabCursor: true,
+        breakpoints: {
+            768: {
+                slidesPerView: 1,
+            },
+            1024: {
+                slidesPerView: 3,
+            }
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
