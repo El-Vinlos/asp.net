@@ -1,0 +1,22 @@
+@model baitap.Models.Product
+
+@{
+    ViewData["Title"] = Model.ProductName;
+}
+
+<div class="product-details">
+    <h2>@Model.ProductName</h2>
+    <img src="~/images/shoes/sample-shoe.jpg" alt="@Model.ProductName" style="max-width:300px;" />
+
+    <p>Price: @Model.Price.ToString("C")</p>
+    <p>@Model.Description</p>
+
+    <form asp-controller="Product" asp-action="AddToCart" method="post">
+        <input type="hidden" name="id" value="@Model.ProductId" />
+        <label>Quantity:</label>
+        <input type="number" name="quantity" value="1" min="1" />
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-cart-plus"></i> Add to Cart
+        </button>
+    </form>
+</div>

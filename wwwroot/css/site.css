@@ -212,12 +212,54 @@ button i {
     letter-spacing: 2px;
     transition: color 0.4s ease;
 }
+/* ============================= */
+/* Cart                */
+/* ============================= */
+
+.cart-dropdown {
+    position: relative;
+    display: inline-block;
+}
+.cart-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    min-width: 250px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+.cart-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.cart-menu .empty {
+    text-align: center;
+    color: #666;
+}
+.cart-footer {
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    text-align: right;
+}
+.cart-badge {
+    background: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    padding: 2px 6px;
+    margin-left: 5px;
+}
 
 /* ============================= */
 /* Search Overlay                */
 /* ============================= */
 
-/* Search container inside navbar */
 .navbar-search {
     position: fixed;
     top: 0;

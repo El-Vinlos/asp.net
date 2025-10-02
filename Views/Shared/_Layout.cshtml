@@ -34,7 +34,23 @@
 
             <div class="navbar-rightside">
                 <button id=""><i class="fa-solid fa-user"></i></button>
-                <button><i class="fa-solid fa-cart-shopping"></i></button>
+                <div class="cart-dropdown">
+                    <button id="cartToggle" class="cart-btn">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span id="cartCount" class="cart-badge">0</span>
+                    </button>
+
+                    <div id="cartMenu" class="cart-menu">
+                        <ul id="cartItems">
+                            <!-- dynamically populated -->
+                            <li class="empty">Your cart is empty</li>
+                        </ul>
+                        <div class="cart-footer">
+                            <a href="/Cart" class="btn-view-cart">Checkout</a>
+                            <a href="/Cart" class="btn-view-cart">View Cart</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>        

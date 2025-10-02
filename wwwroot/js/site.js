@@ -106,3 +106,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const cartToggle = document.getElementById("cartToggle");
+    const cartMenu = document.getElementById("cartMenu");
+
+    cartToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        cartMenu.style.display = cartMenu.style.display === "block" ? "none" : "block";
+    });
+
+    // Close when clicking outside
+    document.addEventListener("click", () => {
+        cartMenu.style.display = "none";
+    });
+});
+
