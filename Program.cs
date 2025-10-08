@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<CartService>();
+builder.Services.AddScoped<BagService>();
 
 // Add EF Core DbContext
 builder.Services.AddDbContext<FlorenciaDbContext>(options =>

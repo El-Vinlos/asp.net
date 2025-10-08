@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace baitap.Controllers;
 
-public class ProductController : Controller
+public class ProductDetailController : Controller
 {
     private readonly FlorenciaDbContext _context;
-    private readonly CartService _cartService;
+    private readonly BagService _bagService;
 
-    public ProductController(FlorenciaDbContext context, CartService cartService)
+    public ProductDetailController(FlorenciaDbContext context, BagService bagService)
     {
         _context = context;
-        _cartService = cartService;
+        _bagService = bagService;
     }
 
     // Product details page
@@ -25,16 +25,14 @@ public class ProductController : Controller
         return View(product);
     }
 
-    // Add to cart (POST)
     [HttpPost]
-    public IActionResult AddToCart(int id, int quantity = 1)
+    public IActionResult AddToBag(int id, int quantity = 1)
     {
         var product = _context.Products.Find(id);
         if (product == null) return NotFound();
 
-        _cartService.AddToCart(product, quantity);
+        _bagService.AddToBag(product, quantity);
 
-        // Redirect back to cart page (or product page)
-        return RedirectToAction("Index", "Cart");
+        return RedirectToAction("Index", "Bag");
     }
 }

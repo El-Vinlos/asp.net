@@ -104,7 +104,7 @@
     }
 
     async function refreshCart() {
-        const res = await fetch("/Cart/GetCartSummary");
+        const res = await fetch("/Bag/GetBagDetail");
         if (!res.ok) return;
         const data = await res.json();
 
@@ -140,7 +140,7 @@
         document.querySelectorAll(".remove-btn").forEach(btn => {
             btn.addEventListener("click", async (e) => {
                 e.stopPropagation();
-                await fetch(`/Cart/RemoveFromCart?id=${btn.dataset.id}`, { method: "POST" });
+                await fetch(`/Bag/RemoveFromCart?id=${btn.dataset.id}`, { method: "POST" });
                 refreshCart();
             });
         });

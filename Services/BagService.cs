@@ -5,13 +5,13 @@ using System.Text.Json;
 
 namespace baitap.Services;
 
-public class CartService
+public class BagService
 {
     private readonly ISession _session;
     private readonly FlorenciaDbContext _context;
     private const string CartKey = "CART";
 
-    public CartService(IHttpContextAccessor accessor)
+    public BagService(IHttpContextAccessor accessor)
     {
         _session = accessor.HttpContext!.Session;
     }
@@ -29,7 +29,7 @@ public class CartService
         _session.SetString(CartKey, JsonSerializer.Serialize(cart));
     }
 
-    public void AddToCart(Product product, int quantity)
+    public void AddToBag(Product product, int quantity)
     {
         var cart = GetCart();
 

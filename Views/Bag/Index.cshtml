@@ -1,6 +1,6 @@
 @model List<baitap.ViewModel.CartItem>
 
-<link rel="stylesheet" href="~/css/cart.css"/>
+<link rel="stylesheet" href="~/css/bag.css"/>
 
 <h2>Your Shopping Cart</h2>
 
@@ -10,7 +10,6 @@
 }
 else
 {
-    <form method="post" asp-controller="Cart" asp-action="UpdateCart">
         <table class="table">
             <thead>
                 <tr>
@@ -30,7 +29,7 @@ else
                         <td>@item.Quantity</td>
                         <td>@item.Total.ToString("C")</td>
                         <td>
-                            <form asp-controller="Cart" asp-action="RemoveFromCart" method="post" style="display:inline;">
+                            <form asp-controller="Bag" asp-action="RemoveFromBag" method="POST" style="display:inline;">
                                 <input type="hidden" name="id" value="@item.ProductId" />
                                 <button type="submit" class="btn btn-link text-danger">Remove</button>
                             </form>
@@ -39,7 +38,6 @@ else
                 }
             </tbody>
         </table>
-    </form>
 
     <h3 class="text-end">Grand Total: @Model.Sum(x => x.Total).ToString("C")</h3>
 }
