@@ -136,7 +136,7 @@
 }
 
 .swiper-button-prev {
-    left: calc(50% - 300px) !important; /* tweak 220px until it looks good */
+    left: calc(50% - 300px) !important;
 }
 
 .swiper-button-next {
@@ -149,7 +149,8 @@
 }
 
 .slide-name, .slide-price{
-    font-family: 'Raleway', serif;
+    display: block;
+    color: #000;
     padding-top: 1rem ;
     font-size: 1em;
     text-transform: uppercase;

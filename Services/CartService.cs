@@ -8,6 +8,7 @@ namespace baitap.Services;
 public class CartService
 {
     private readonly ISession _session;
+    private readonly FlorenciaDbContext _context;
     private const string CartKey = "CART";
 
     public CartService(IHttpContextAccessor accessor)
@@ -43,10 +44,11 @@ public class CartService
             {
                 ProductId = product.ProductId,
                 ProductName = product.ProductName,
+                ImageUrl = product.ImageUrl,
                 Price = product.Price,
                 Quantity = quantity,
-                Discount = 0, // you can calculate later
-                Tax = 0       // same
+                Discount = 0,
+                Tax = 0
             });
         }
 
@@ -62,5 +64,10 @@ public class CartService
             cart.Remove(item);
             SaveCart(cart);
         }
+    }
+
+    public Product GetProductById(int id)
+    {
+        return _context.Products.FirstOrDefault(p => p.ProductId == id);
     }
 }

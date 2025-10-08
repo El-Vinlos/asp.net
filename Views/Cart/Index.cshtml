@@ -1,5 +1,7 @@
 @model List<baitap.ViewModel.CartItem>
 
+<link rel="stylesheet" href="~/css/cart.css"/>
+
 <h2>Your Shopping Cart</h2>
 
 @if (!Model.Any())
@@ -8,31 +10,36 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th>Total</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.ProductName</td>
-                <td>@item.Price.ToString("C")</td>
-                <td>@item.Quantity</td>
-                <td>@item.Total.ToString("C")</td>
-                <td>
-                    <a asp-controller="Cart" asp-action="Remove" asp-route-id="@item.ProductId">Remove</a>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
+    <form method="post" asp-controller="Cart" asp-action="UpdateCart">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProductName</td>
+                        <td>@item.Price.ToString("C")</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Total.ToString("C")</td>
+                        <td>
+                            <form asp-controller="Cart" asp-action="RemoveFromCart" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@item.ProductId" />
+                                <button type="submit" class="btn btn-link text-danger">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
 
     <h3 class="text-end">Grand Total: @Model.Sum(x => x.Total).ToString("C")</h3>
 }

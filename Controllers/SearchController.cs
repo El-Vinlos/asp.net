@@ -12,7 +12,7 @@ public class SearchController : Controller
         _context = context;
     }
 
-    public IActionResult Index(string query)
+    public IActionResult Index(string? query)
     {
         query = query?.Trim();  // normalize
 

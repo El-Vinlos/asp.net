@@ -17,8 +17,35 @@ public class CartController : Controller
         var cart = _cartService.GetCart();
         return View(cart);
     }
-    [HttpGet("Cart/Remove/{id}")]
-    public IActionResult Remove(int id)
+
+    public IActionResult GetCartSummary()
+    {
+        var cart = _cartService.GetCart();
+        return Json(new {
+            count = cart.Sum(c => c.Quantity),
+            items = cart.Select(c => new {
+                id = c.ProductId,
+                name = c.ProductName,
+                image = c.ImageUrl,
+                price = c.Price,
+                quantity = c.Quantity,
+                total = c.Price * c.Quantity
+            })
+        });
+    }
+    
+    [HttpPost]
+    public IActionResult AddToCart(int id)
+    {
+        var product = _cartService.GetProductById(id); // fetch from DB
+        if (product == null) return NotFound();
+
+        _cartService.AddToCart(product, 1);
+        return Ok();
+    }
+    
+    [HttpPost]
+    public IActionResult RemoveFromCart(int id)
     {
         _cartService.RemoveFromCart(id);
         return RedirectToAction(nameof(Index));

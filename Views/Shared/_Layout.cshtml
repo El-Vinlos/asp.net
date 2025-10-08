@@ -16,10 +16,11 @@
           crossorigin="anonymous"
           referrerpolicy="no-referrer" /> 
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet">
 </head>
-<body>
-<header>
+<body class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" 
+             && ViewContext.RouteData.Values["action"]?.ToString() == "Index"
+                 ? "home-page" 
+                 : "inner-page")"><header>
     <nav class="navbar">
     <nav class="navbar-top">
         <div class="navbar-container">
@@ -33,21 +34,25 @@
             </div>
 
             <div class="navbar-rightside">
-                <button id=""><i class="fa-solid fa-user"></i></button>
-                <div class="cart-dropdown">
-                    <button id="cartToggle" class="cart-btn">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span id="cartCount" class="cart-badge">0</span>
+                <button id="account-toggle"><i class="fa-solid fa-user"></i></button>
+                <div class="bag-dropdown">
+                    <button id="bagToggle" class="bag-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="bag-icon" aria-hidden="true">
+                          <path d="M256 144C256 108.7 284.7 80 320 80C355.3 80 384 108.7 384 144L384 192L256 192L256 144zM208 192L144 192C117.5 192 96 213.5 96 240L96 448C96 501 139 544 192 544L448 544C501 544 544 501 544 448L544 240C544 213.5 522.5 192 496 192L432 192L432 144C432 82.1 381.9 32 320 32C258.1 32 208 82.1 208 144L208 192zM232 240C245.3 240 256 250.7 256 264C256 277.3 245.3 288 232 288C218.7 288 208 277.3 208 264C208 250.7 218.7 240 232 240zM384 264C384 250.7 394.7 240 408 240C421.3 240 432 250.7 432 264C432 277.3 421.3 288 408 288C394.7 288 384 277.3 384 264z" fill="currentcolor"/>
+                          <text id="bagCount" x="50%" y="78%" text-anchor="middle" class="bag-title" dominant-baseline="middle" font-family="Helvetica Neue, Helvetica, Open Sans sans-serif" font-size="200" font-weight="700" fill="#fff">
+                              0
+                          </text>
+                        </svg>
                     </button>
 
-                    <div id="cartMenu" class="cart-menu">
-                        <ul id="cartItems">
+                    <div id="bagMenu" class="bag-menu">
+                        <ul id="bagItems">
                             <!-- dynamically populated -->
-                            <li class="empty">Your cart is empty</li>
+                            <li class="empty">Your bag is empty</li>
                         </ul>
-                        <div class="cart-footer">
-                            <a href="/Cart" class="btn-view-cart">Checkout</a>
-                            <a href="/Cart" class="btn-view-cart">View Cart</a>
+                        <div class="bag-footer">
+                            <a href="/Cart" class="btn-bag view">View Bag</a>
+                            <a href="/Cart" class="btn-bag checkout">Checkout</a>
                         </div>
                     </div>
                 </div>
@@ -86,59 +91,59 @@
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
         <input type="text" name="query" id="navbarSearchInput" placeholder="Search products..." />
-    </form>
-    <div id="navbarSearchSuggestions" class="search-suggestions"></div>
+</form>
+<div id="navbarSearchSuggestions" class="search-suggestions"></div>
 </div>
 
 
 <footer class="site-footer">
-    <div class="footer-container">
-        <div class="footer-column">
-            <h4>EXPLORE DE REGAL</h4>
-            <ul>
-                <li><a href="#">Haute Couture</a></li>
-                <li><a href="#">Fashion</a></li>
-                <li><a href="#">Jewelry</a></li>
-                <li><a href="#">Watches</a></li>
-                <li><a href="#">Beauty</a></li>
-                <li><a href="#">Fragrance</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-column">
-            <h4>ONLINE SERVICES</h4>
-            <ul>
-                <li><a href="#">Payment Methods</a></li>
-                <li><a href="#">Shipping Options</a></li>
-                <li><a href="#">My Account</a></li>
-                <li><a href="#">Returns</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">E-gift card</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-column">
-            <h4>BOUTIQUE SERVICES</h4>
-            <ul>
-                <li><a href="#">Store Locator</a></li>
-                <li><a href="#">Book an Appointment</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-column">
-            <h4>THE HOUSE OF DE REGAL</h4>
-            <ul>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Legal</a></li>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Sustainability</a></li>
-                <li><a href="#">Accessibility</a></li>
-            </ul>
-        </div>
+<div class="footer-container">
+    <div class="footer-column">
+        <h4>EXPLORE DE REGAL</h4>
+        <ul>
+            <li><a href="#">Haute Couture</a></li>
+            <li><a href="#">Fashion</a></li>
+            <li><a href="#">Jewelry</a></li>
+            <li><a href="#">Watches</a></li>
+            <li><a href="#">Beauty</a></li>
+            <li><a href="#">Fragrance</a></li>
+        </ul>
     </div>
-    <div class="footer-logo">
-        <a asp-controller="Home" asp-action="Index">Florencia de Regano</a>
+
+    <div class="footer-column">
+        <h4>ONLINE SERVICES</h4>
+        <ul>
+            <li><a href="#">Payment Methods</a></li>
+            <li><a href="#">Shipping Options</a></li>
+            <li><a href="#">My Account</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">E-gift card</a></li>
+        </ul>
     </div>
+
+    <div class="footer-column">
+        <h4>BOUTIQUE SERVICES</h4>
+        <ul>
+            <li><a href="#">Store Locator</a></li>
+            <li><a href="#">Book an Appointment</a></li>
+        </ul>
+    </div>
+
+    <div class="footer-column">
+        <h4>THE HOUSE OF DE REGAL</h4>
+        <ul>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Legal</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Sustainability</a></li>
+            <li><a href="#">Accessibility</a></li>
+        </ul>
+    </div>
+</div>
+<div class="footer-logo">
+    <a asp-controller="Home" asp-action="Index">Florencia de Regano</a>
+</div>
 </footer>
 <script src="~/js/site.js"></script>
 </body>

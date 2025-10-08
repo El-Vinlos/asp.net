@@ -1,18 +1,19 @@
 /** {*/
-/*    background: #000 !important;*/
+/*    background: black !important;*/
 /*    color: #0f0 !important;*/
 /*    outline: solid #f00 1px !important;*/
 /*}*/
 
 
+/*font-family: "Merriweather", "Raleway", "Open sans", serif;*/
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 html, body {
     margin: 0;
     padding: 0;
+    font-family: "Helvetica Neue", "Montserrat", "Open sans", sans-serif;
     height: 100%;
-    font-family: "Merriweather", "Montserrat", "Open sans", sans-serif;
-    background: #000;
+    background: black;
     }
 
 body.no-scroll {
@@ -20,7 +21,7 @@ body.no-scroll {
 }
 
 main{
-    background: #fff;
+    background: white;
     padding-bottom: 1rem;
 }
 
@@ -71,26 +72,37 @@ main{
     font-size: 2rem;
     font-weight: normal;
     text-decoration: none;
-    color: #fff;
+    color: white;
     font-family: "Jost", sans-serif;
     letter-spacing: 2px;
     transition: color 0.4s ease;
 }
 
-.navbar-top a,
-.navbar-top button i {
-    color: #fff;
+.navbar-top a:not(.bag-menu *),
+.navbar-top button{
+    color: white;
+    --cart-text-color: black;
     transition: color 0.4s ease;
 }
 
-.navbar-top.scrolled {
-    background: #fff;
+.bag-title{
+    fill: black;
+    transition: fill 0.4s ease;
 }
 
-.navbar-top.scrolled a,
-.navbar-top.scrolled button i {
-    color: #000;
+.navbar-top.scrolled {
+    background: white;
 }
+
+.navbar-top.scrolled a:not(.bag-menu *),
+.navbar-top.scrolled button{
+    color: black;
+}
+
+.navbar-top.scrolled .bag-title{
+    fill: white;
+}
+
 
 .sidebar-overlay {
     position: fixed;
@@ -114,15 +126,15 @@ main{
 
 .sidebar-menu a{
     text-decoration: none;
-    border-bottom: #000 solid 1px;
-    color: #000;
+    border-bottom: black solid 1px;
+    color: black;
 }
 .sidebar-menu {
     position: fixed;
     width: 220px;
     height: 100vh;
     overflow-y: auto;
-    background: #fff;
+    background: white;
     padding: 1rem;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
@@ -133,7 +145,7 @@ main{
     transform: translateX(0);
 }
 .sidebar-menu.active i {
-    color: #000;
+    color: black;
 }
 
 .menu-toggle-container {
@@ -150,19 +162,14 @@ button {
     border: none;
     padding: 0;
     cursor: pointer;
-}
-
-button i {
     font-size: 1rem;
-    color: #fff;
 }
-
 
 /* FOOTER */
 .site-footer {
-    background-color: #000;
-    font-family: "Helvetica", "Montserrat", "Open sans", sans-serif;
-    color: #fff;
+    background-color: black;
+    font-family: "Helvetica Neue","Helvetica", "Montserrat", "Open sans", sans-serif;
+    color: white;
     padding: 3rem 2rem;
     font-size: 0.9rem;
 }
@@ -194,7 +201,7 @@ button i {
 }
 
 .footer-column ul li a {
-    color: #fff;
+    color: white;
     text-decoration: none;
     transition: color 0.3s;
 }
@@ -207,53 +214,121 @@ button i {
     font-size: 10rem;
     font-weight: normal;
     text-decoration: none;
-    color: #fff;
+    color: white;
     font-family: "Jost", sans-serif;
     letter-spacing: 2px;
     transition: color 0.4s ease;
 }
+/* =============================B*/
+/* Bag                */
 /* ============================= */
-/* Cart                */
-/* ============================= */
-
-.cart-dropdown {
+.bag-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    vertical-align: -0.125em;
+}
+.bag-dropdown {
     position: relative;
     display: inline-block;
 }
-.cart-menu {
+.bag-menu {
     display: none;
     position: absolute;
     right: 0;
     top: 100%;
     background: white;
     border: 1px solid #ddd;
-    min-width: 250px;
+    width: 500px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     z-index: 1000;
 }
-.cart-menu ul {
+
+.remove-btn i {
+    text-decoration: none;
+    color: black;
+}
+
+.bag-menu ul {
     list-style: none;
     margin: 0;
     padding: 10px;
     max-height: 300px;
     overflow-y: auto;
 }
-.cart-menu .empty {
+.bag-menu .empty {
     text-align: center;
     color: #666;
 }
-.cart-footer {
+.bag-footer {
     border-top: 1px solid #ddd;
     padding: 10px;
-    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    text-align: center;
 }
-.cart-badge {
-    background: red;
+
+.btn-bag{
+    border: 1px solid black;
+    padding: 1rem;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.btn-bag.view {
     color: white;
-    border-radius: 50%;
-    font-size: 12px;
-    padding: 2px 6px;
-    margin-left: 5px;
+    background: black;
+    transition: background 1s ease, transform 0.4s ease;
+}
+
+.btn-bag.view:hover {
+    background: #1b263b;
+    transform: scale(0.95);
+    transition: background 0.4s ease, transform 0.4s ease;
+}
+
+.btn-bag.checkout {
+    color: black;
+    transition: transform 0.4s ease;
+}
+
+.btn-bag.checkout:hover {
+    transform: scale(0.95);
+    transition: transform 0.4s ease;
+}
+
+.bag-thumb {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.bag-item {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bag-details {
+    display: flex;
+    font-family: "Helvetica Neue","Helvetica", "Montserrat", "Open sans", sans-serif;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.bag-name{
+    font-size: 1.2rem;
+}
+
+.bag-price {
+    font-weight: lighter;
+}
+
+.bag-qty{
+    font-weight: lighter;
+    font-size: 0.8rem;
 }
 
 /* ============================= */
@@ -270,13 +345,13 @@ button i {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #fff;
-    padding: 1rem 0;
+    background: white;
+    padding: 1.45rem 0;
     z-index: 1000;
 }
 .navbar-search i {
     transform: translateX(3.3rem);
-    color: #000;
+    color: black;
     transition: transform 0.4s ease;
 }
 #navbarSearchInput {
@@ -313,8 +388,8 @@ button i {
     position: fixed;
     top: 60px;
     width: 100%;
-    color: #000;
-    background: #fff;
+    color: black;
+    background: white;
     font-size: 0.9rem;
     max-height: 200px;
     overflow-y: auto;
