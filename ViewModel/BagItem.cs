@@ -1,6 +1,6 @@
 namespace baitap.ViewModel;
 
-public class CartItem
+public class BagItem
 {
     public int ProductId { get; set; }
     public string ProductName { get; set; } = string.Empty;

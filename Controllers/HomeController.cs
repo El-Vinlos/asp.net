@@ -7,7 +7,7 @@ namespace baitap.Controllers;
 public class HomeController : Controller
 {
     private readonly string _connectionString =
-        "Server=.;Database=florenciaDB;User Id=sa;Password=Powerman205;Encrypt=False;";
+        "Server=.;initial catalog=FlorenciaDB;persist security info=True;Integrated Security=SSPI;TrustServerCertificate=True";
 
     public IActionResult Index()
     {
@@ -16,6 +16,7 @@ public class HomeController : Controller
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             conn.Open();
+            
             string sql = @"SELECT TOP 10 ProductId, ProductName, Description, Price, ImageUrl 
                            FROM Products 
                            WHERE CategoryId = 3

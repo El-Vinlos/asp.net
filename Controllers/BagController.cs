@@ -3,24 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace baitap.Controllers;
 
-public class BagController : Controller
+public class BagController(BagService bagService) : Controller
 {
-    private readonly BagService _bagService;
-
-    public BagController(BagService bagService)
-    {
-        _bagService = bagService;
-    }
-
     public IActionResult Index()
     {
-        var cart = _bagService.GetCart();
+        var cart = bagService.GetBag();
         return View(cart);
     }
 
     public IActionResult GetBagDetail()
     {
-        var cart = _bagService.GetCart();
+        var cart = bagService.GetBag();
         return Json(new {
             count = cart.Sum(c => c.Quantity),
             items = cart.Select(c => new {
@@ -37,17 +30,19 @@ public class BagController : Controller
     [HttpPost]
     public IActionResult AddToBag(int id)
     {
-        var product = _bagService.GetProductById(id);
-        if (product == null) return NotFound();
-
-        _bagService.AddToBag(product, 1);
+        if (!bagService.TryAddToBag(id))
+        {
+            return NotFound();
+        }
         return Ok();
     }
     
     [HttpPost]
     public IActionResult RemoveFromBag(int id)
     {
-        _bagService.RemoveFromCart(id);
+        bagService.RemoveFromBag(id);
+        if (Request.Headers.XRequestedWith == "XMLHttpRequest")
+            return Ok(new { success = true });
         return RedirectToAction(nameof(Index));
     }
 }

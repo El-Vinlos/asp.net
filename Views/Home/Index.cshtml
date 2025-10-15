@@ -43,8 +43,8 @@
         @foreach (var shoe in ViewBag.Shoes)
         {
             <div class="swiper-slide">
-                <a asp-controller="ProductDetail" asp-action="Details" asp-route-id="@shoe.ProductId">
-                    <img src="~/@shoe.ImageUrl" alt="@shoe.ProductName" loading="lazy" />
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@shoe.ProductId">
+                    <img src="@shoe.ImageUrl" alt="@shoe.ProductName" loading="lazy" />
                     <div class="slide-name">@shoe.ProductName</div>
                     <div class="slide-price">$@shoe.Price</div>
                 </a>

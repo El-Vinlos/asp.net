@@ -13,7 +13,7 @@
     <p>Price: @Model.Price.ToString("C")</p>
     <p>@Model.Description</p>
 
-    <form asp-controller="ProductDetail" asp-action="AddToBag" method="post">
+    <form asp-controller="Products" asp-action="AddToBag" method="post">
         <input type="hidden" name="id" value="@Model.ProductId" />
         <label>Quantity:</label>
         <input type="number" name="quantity" value="1" min="1" />

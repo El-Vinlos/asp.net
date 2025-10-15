@@ -79,10 +79,10 @@
                 return;
             }
 
-            const res = await fetch(`/Search/Suggestions?term=${encodeURIComponent(query)}`);
+            const res = await fetch(`/Products/Suggestions?term=${encodeURIComponent(query)}`);
             const data = await res.json();
             suggestionsContainer.innerHTML = data
-                .map(d => `<div onclick="location.href='/Search/Index?q=${encodeURIComponent(d)}'">${d}</div>`)
+                .map(d => `<div onclick="location.href='/Products/Search?query=${encodeURIComponent(d)}'">${d}</div>`)
                 .join("");
         });
     }
@@ -103,7 +103,7 @@
         document.addEventListener("click", () => { bagMenu.style.display = "none"; });
     }
 
-    async function refreshCart() {
+    async function refreshBag() {
         const res = await fetch("/Bag/GetBagDetail");
         if (!res.ok) return;
         const data = await res.json();
@@ -140,11 +140,21 @@
         document.querySelectorAll(".remove-btn").forEach(btn => {
             btn.addEventListener("click", async (e) => {
                 e.stopPropagation();
-                await fetch(`/Bag/RemoveFromCart?id=${btn.dataset.id}`, { method: "POST" });
-                refreshCart();
+                await fetch(`/Bag/RemoveFromBag/?id=${btn.dataset.id}`,
+                    { 
+                            method: "POST" ,
+                            headers: { "X-requested-With": "XMLHttpRequest" 
+                        } 
+                });
+                await refreshBag();
+                
+                if (window.location.pathname.toLowerCase().includes("/bag")){
+                    window.location.reload();
+                }
+                
             });
         });
     }
 
-    refreshCart();
+    refreshBag();
 });

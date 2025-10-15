@@ -5,33 +5,27 @@ using System.Text.Json;
 
 namespace baitap.Services;
 
-public class BagService
+public class BagService(IHttpContextAccessor accessor, FlorenciaDbContext context)
 {
-    private readonly ISession _session;
-    private readonly FlorenciaDbContext _context;
-    private const string CartKey = "CART";
+    private readonly ISession _session = accessor.HttpContext!.Session;
+    private const string BagKey = "BAG";
 
-    public BagService(IHttpContextAccessor accessor)
+    public List<BagItem> GetBag()
     {
-        _session = accessor.HttpContext!.Session;
+        var data = _session.GetString(BagKey);
+        if (string.IsNullOrEmpty(data)) return new List<BagItem>();
+
+        return JsonSerializer.Deserialize<List<BagItem>>(data)!;
     }
 
-    public List<CartItem> GetCart()
+    private void SaveBag(List<BagItem> cart)
     {
-        var data = _session.GetString(CartKey);
-        if (string.IsNullOrEmpty(data)) return new List<CartItem>();
-
-        return JsonSerializer.Deserialize<List<CartItem>>(data)!;
-    }
-
-    private void SaveCart(List<CartItem> cart)
-    {
-        _session.SetString(CartKey, JsonSerializer.Serialize(cart));
+        _session.SetString(BagKey, JsonSerializer.Serialize(cart));
     }
 
     public void AddToBag(Product product, int quantity)
     {
-        var cart = GetCart();
+        var cart = GetBag();
 
         var existing = cart.FirstOrDefault(c => c.ProductId == product.ProductId);
         if (existing != null)
@@ -40,7 +34,7 @@ public class BagService
         }
         else
         {
-            cart.Add(new CartItem
+            cart.Add(new BagItem
             {
                 ProductId = product.ProductId,
                 ProductName = product.ProductName,
@@ -52,22 +46,29 @@ public class BagService
             });
         }
 
-        SaveCart(cart);
+        SaveBag(cart);
     }
 
-    public void RemoveFromCart(int id)
+    public bool TryAddToBag(int id)
     {
-        var cart = GetCart();
+        var product = GetProductById(id);
+        if (product == null) return false;
+        
+        AddToBag(product,1);
+        return true;
+    }
+
+    public void RemoveFromBag(int id)
+    {
+        var cart = GetBag();
         var item = cart.FirstOrDefault(c => c.ProductId == id);
-        if (item != null)
-        {
-            cart.Remove(item);
-            SaveCart(cart);
-        }
+        if (item == null) return;
+        cart.Remove(item);
+        SaveBag(cart);
     }
 
     public Product GetProductById(int id)
     {
-        return _context.Products.FirstOrDefault(p => p.ProductId == id);
+        return context.Products.FirstOrDefault(p => p.ProductId == id);
     }
 }

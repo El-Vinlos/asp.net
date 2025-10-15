@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<BagService>();
+builder.Services.AddScoped<SearchService>();
 
 // Add EF Core DbContext
 builder.Services.AddDbContext<FlorenciaDbContext>(options =>
